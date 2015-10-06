@@ -50,30 +50,30 @@ angular.module('electricityUsage', ['ionic', 'electricityUsage.controllers', 'el
     }
   })
 
-  .state('tab.history', {
-      url: '/chats',
+  .state('tab.statistics', {
+      url: '/stats',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
+        'tab-stats': {
+          templateUrl: 'templates/tab-stats.html',
           controller: 'ChatsCtrl'
         }
       }
     })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
-        }
-      }
-    })
+    //.state('tab.chat-detail', {
+    //  url: '/chats/:chatId',
+    //  views: {
+    //    'tab-chats': {
+    //      templateUrl: 'templates/chat-detail.html',
+    //      controller: 'ChatDetailCtrl'
+    //    }
+    //  }
+    //})
 
-  .state('tab.account', {
-    url: '/account',
+  .state('tab.settings', {
+    url: '/settings',
     views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
+      'tab-settings': {
+        templateUrl: 'templates/tab-settings.html',
         controller: 'AccountCtrl'
       }
     }
