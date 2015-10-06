@@ -1,1 +1,13 @@
 /* Empty. Add your own CSS if you like */
+.progress {
+  height: 3em;
+  /*i { line-height: 3.5em; }*/
+}
+
+.progress i {
+  line-height: 3.5em;
+}
+
+.progress-bar {
+  transition: width 1s ease-in-out;
+}

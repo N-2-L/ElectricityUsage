@@ -69,6 +69,16 @@ angular.module('electricityUsage', ['ionic', 'electricityUsage.controllers', 'el
     //  }
     //})
 
+    .state('tab.notifications', {
+      url: '/notifications',
+      views: {
+        'tab-notifications': {
+          templateUrl: 'templates/tab-notifications.html',
+          controller: 'ChatsCtrl'
+        }
+      }
+    })
+
   .state('tab.settings', {
     url: '/settings',
     views: {
