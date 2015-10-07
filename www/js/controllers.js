@@ -38,7 +38,25 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo'])
     $scope.progressValue = amt;
   }, 200);
 
-});
+})
+
+  .controller('homeCtrl',function($scope,$timeout){
+    $timeout(function() {
+      if(1> 0) {            //need to add conditions
+        while(true) {
+          var UnitsPmonth = prompt('Units per Month:');
+          var MonthStartDate = prompt('Month Start Date:');
+          if(UnitsPmonth && MonthStartDate) {
+            createProject(projectTitle);// need to change
+            break;
+          }
+        }
+      }
+    });
+
+  });
+
+
 
 //var myApp = angular.module("myApp", ["ui.bootstrap","countTo"]);
 //

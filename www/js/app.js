@@ -45,7 +45,7 @@ angular.module('electricityUsage', ['ionic', 'electricityUsage.controllers', 'el
     views: {
       'tab-home': {
         templateUrl: 'templates/tab-home.html',
-        controller: 'DashCtrl'
+        controller: 'homeCtrl'
       }
     }
   })
