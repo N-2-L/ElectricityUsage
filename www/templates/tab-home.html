@@ -16,7 +16,7 @@
           <div class="item item-divider text-center">Quota left :</div>
           <div class="item item-body text-center">
             <div>
-              <b>Rs. 1500.00</b>
+              <b>Rs.1500.00</b>
             </div>
           </div>
         </div>
@@ -26,7 +26,7 @@
           <div class="item item-divider text-center">Per day :</div>
           <div class="item item-body text-center">
             <div>
-              <b>Rs. 50.00</b>
+              <b>Rs.50.00</b>
             </div>
           </div>
         </div>
@@ -36,9 +36,9 @@
     <!-- progressbar added by shanika-->
     <div ng-controller="progressBar" class="container">
 
-      <div class="page-header">
-        <h5>This month usage</h5>
-      </div>
+      <label class="row text-center">
+        <div class="col col-33">This month usage :</div><div class="col col-33">25 units of 100</div><div class="col col-33">Rs.250.00 of Rs.1000.00</div>
+      </label>
 
       <progressbar class="progress-striped active" animate="true" max="100" value="progressValue" type="success">
         <i><span count-to="{{countTo}}" duration="1" count-from="{{countFrom}}"></span> / 100</i>
@@ -47,12 +47,24 @@
 
     <div class="container">
       <ul class="list">
-        <li class="item">Ideal Usage</li>
-        <li class="item">Ideal Usage</li>
-        <li class="item">Ideal Usage</li>
-        <li class="item">Ideal Usage</li>
-        <li class="item">Ideal Usage</li>
-        <li class="item">Ideal Usage</li>
+        <li class="item">Ideal Usage
+          <span class="badge badge-balanced">25 units</span>
+        </li>
+        <li class="item">Usage Status
+          <span class="badge badge-balanced">20 units less than ideal</span>
+        </li>
+        <li class="item">Today usage
+          <span class="badge badge-balanced">5 units</span>
+        </li>
+        <li class="item">This week usage
+          <span class="badge badge-balanced">15 units</span>
+        </li>
+        <li class="item">Current billing period
+          <span class="badge badge-balanced">put period from variable</span>
+        </li>
+        <li class="item">Today date
+          <span class="badge badge-positive">date</span>
+        </li>
       </ul>
     </div>
 
