@@ -8,7 +8,7 @@
           </div>
           <div class="col col-50">
             <label class="item item-input">
-              <input type="number" placeholder="Units">
+              <input type="number" placeholder="Units" ng-model="units">
             </label>
           </div>
         </div>
@@ -20,7 +20,8 @@
           </div>
           <div class="col col-50">
             <label class="item item-input">
-              <input type="number" placeholder="amount">
+              <input type="number" placeholder="{{units/4}}" ng-model="amount">
+
             </label>
           </div>
         </div>
@@ -44,7 +45,7 @@
           </div>
           <div class="col col-50">
             <label class="item item-select">
-              <select style="max-width: 100%;">
+              <select style="max-width: 100%;padding-left: 0%; padding-right: 60%">
                 <option>Method 1</option>
                 <option selected>Method 2</option>
                 <option>Method 3</option>
