@@ -12,3 +12,7 @@
 .progress-bar {
   transition: width 1s ease-in-out;
 }
+
+.item-select select{
+  max-width: 100%;
+}
