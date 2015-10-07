@@ -1,30 +1,12 @@
 <ion-view view-title="Settings">
   <ion-content class="padding">
-    <!--<div class="list card">-->
-      <!--<div class="item item-divider">Upcoming</div>-->
-      <!--<div class="item item-body">-->
-        <!--<div>-->
-          <!--You have <b>29</b> meetings on your calendar tomorrow.-->
-        <!--</div>-->
-        <!--<div>-->
-          <!--You have <b>29</b> meetings on your calendar tomorrow.-->
-        <!--</div>-->
-      <!--</div>-->
-
-      <!--<ion-list>-->
-        <!--<ion-toggle  ng-model="settings.upComing">-->
-          <!--Enable Friends-->
-        <!--</ion-toggle>-->
-      <!--</ion-list>-->
-
-    <!--</div>-->
     <ul class="list">
       <li class="item">
         <div class="row">
-          <div class="col col-75">
+          <div class="col col-50">
             <label> Set Units per month:</label>
           </div>
-          <div class="col col-25">
+          <div class="col col-50">
             <label class="item item-input">
               <input type="number" placeholder="Units">
             </label>
@@ -33,10 +15,10 @@
       </li>
       <li class="item">
         <div class="row">
-          <div class="col col-75">
+          <div class="col col-50">
             <label> Set Monthly amount:</label>
           </div>
-          <div class="col col-25">
+          <div class="col col-50">
             <label class="item item-input">
               <input type="number" placeholder="amount">
             </label>
@@ -45,10 +27,10 @@
       </li>
       <li class="item">
         <div class="row">
-          <div class="col col-75">
+          <div class="col col-50">
             <label> Set Month Start Date:</label>
           </div>
-          <div class="col col-25">
+          <div class="col col-50">
             <label class="item item-input">
               <input type="date" placeholder="Date">
             </label>
@@ -57,12 +39,12 @@
       </li>
       <li class="item">
         <div class="row">
-          <div class="col col-75">
+          <div class="col col-50">
             <label> Set Notification Method:</label>
           </div>
-          <div class="col col-25">
+          <div class="col col-50">
             <label class="item item-select">
-              <select>
+              <select style="max-width: 100%;">
                 <option>Method 1</option>
                 <option selected>Method 2</option>
                 <option>Method 3</option>
@@ -73,14 +55,5 @@
       </li>
 
     </ul>
-
-    <!--<ion-list>-->
-      <!--<ion-toggle  ng-model="settings.enableFriends">-->
-        <!--Enable Friends-->
-      <!--</ion-toggle>-->
-    <!--</ion-list>-->
-
-
-
   </ion-content>
 </ion-view>
