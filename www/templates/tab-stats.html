@@ -1,7 +1,7 @@
 <ion-view view-title="Statistics">
   <ion-content>
 
-    <div ng-controller="LineCtrl" class="container">
+    <div ng-controller="GraphCtrl" class="container">
 
       <!-- select week or month-S-->
       <div class="page-header">
@@ -14,12 +14,13 @@
 
       <!-- try bootstrap dropdown-->
 
-      <canvas id="ticks" class="chart chart-line chart-xl" data="data" options="options" labels="labels"></canvas>
+      <canvas id="daily" class="chart chart-line chart-xl" data="data" labels="labels" chart-series="series" chart-legend="true" options="options"></canvas>
 
       <div class="page-header">
         <h5 class="text-center"><b>MONTHLY USAGE</b></h5>
       </div>
-      <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="true" chart-series="series" chart-click="onClick"></canvas>
+
+      <canvas id="monthly" class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series" chart-legend="true" chart-click="onClick"></canvas>
 
     </div>
 

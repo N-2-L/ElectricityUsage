@@ -11,7 +11,7 @@
           <div class="item item-divider text-center">Days :</div>
           <div class="item item-body text-center">
             <div>
-              <b>30</b>
+              <b>{{remainingDays}}</b>
             </div>
           </div>
         </div>
@@ -22,7 +22,7 @@
           <div class="item item-divider text-center">Quota :</div>
           <div class="item item-body text-center">
             <div>
-              <b>Rs.1500</b>
+              <b>Rs.{{input.AmountPM}}</b>
             </div>
           </div>
         </div>
@@ -33,7 +33,7 @@
           <div class="item item-divider text-center">Per day :</div>
           <div class="item item-body text-center">
             <div>
-              <b>Rs.{{input.UnitsPM}}</b>
+              <b>Rs.{{input.AmountPM}}</b>
             </div>
           </div>
         </div>
@@ -79,25 +79,7 @@
       </ul>
     </div>
 
-    <!--<div ng-app="myApp" ng-controller="progressBar" class="container">-->
-
-      <!--<div class="page-header">-->
-        <!--<h1><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/15309/angular-logo.svg" alt="Angular.js Logo" width="50" height="50" /> Angular UI <small>Progress Bar</small></h1>-->
-      <!--</div>-->
-
-      <!--<progressbar class="progress-striped active" animate="true" max="100" value="progressValue" type="success"><i><span count-to="{{countTo}}" duration="1" count-from="{{countFrom}}"></span> / 100</i></progressbar>-->
   </ion-content>
 </ion-view>
 
-<!--<ion-view title="Home">-->
-  <!--<ion-content class="padding">-->
-    <!--<div class="list card">-->
-      <!--<div class="item item-divider">Upcoming</div>-->
-      <!--<div class="item item-body">-->
-        <!--<div>-->
-          <!--You have <b>29</b> meetings on your calendar tomorrow.-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</ion-content>-->
-<!--</ion-view>-->
+
