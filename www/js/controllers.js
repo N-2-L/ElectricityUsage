@@ -1,5 +1,5 @@
 angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.js'])
-//angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo'])
+
   .factory('Authorization', function() {
 
   authorization = {};
@@ -36,36 +36,6 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
     }
   })
 ///////////////////////////////////////////////////////////
-
-
-.controller('DashCtrl', function($scope) {})
-
-.controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
-})
-
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
-
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
-
-})
-
   .controller('SettingsCtrl', function($scope,Authorization) {
     $scope.input = Authorization;
     window.localStorage['UnitsPM'] = $scope.input.UnitsPM;
@@ -170,6 +140,7 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
 
 
     $scope.input = Authorization;
+
     // generates today date!
     var todayDate = function(){
 
@@ -195,38 +166,72 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
 
 
 
-    var createUnitsPerMonth = function(Units) {
-      // craeate Units per month in local
-      window.localStorage['UnitsPM'] = Units;
-      $scope.input.UnitsPM = Units;
-
+    var createAmountPerMonth = function(Amount) {
+      // craeate Amount per month in local
+      window.localStorage['AmountPM'] = Amount;
+      $scope.input.AmountPM = Amount;
     };
 
-    var getUnitsPerMonth = function(){
-      // get Units per month from local
-      $scope.input.UnitsPM = window.localStorage['UnitsPM'];
-      return $scope.input.UnitsPM;
 
+    var getAmountPerMonth = function(){
+      // get Amount per month from local
+      $scope.input.AmountPM = window.localStorage['AmountPM'];
+      return $scope.input.AmountPM;
     };
+
+    var createStartDate = function(Date) {
+      // craeate billing period starting date in local
+      window.localStorage['BillingStartDate'] = Date;
+      console.log(Date);
+      $scope.input.BillingStartDate = Date;
+    };
+
+    var getStartDate = function(){
+      // get billing period starting date from local
+      $scope.input.BillingStartDate = window.localStorage['BillingStartDate'];
+      return $scope.input.BillingStartDate;
+    };
+
 
     $scope.input.count = 0;
-    $scope.countUnits = function(){
+    $scope.countUnits = function() {
       console.log($scope.input.count);
       $scope.input.count += 1;
+    };
+
+
+    //function to calculate remaining days
+    //calculate the remaining days in a proper way if in next month
+    var calculateRemainingDays = function(billingDate){
+      var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+      var today = new Date();
+      var thisMonthBillingDate = new Date(today.getFullYear(),today.getMonth(),billingDate);
+      if(thisMonthBillingDate.getMilliseconds()>today.getMilliseconds()){
+        $scope.remainingDays = Math.round(Math.abs((today.getMilliseconds() - thisMonthBillingDate.getMilliseconds())/(oneDay)));
+        console.log("a");
+      }else{
+        $scope.remainingDays = 30 - Math.round(Math.abs((today.getMilliseconds() - thisMonthBillingDate.getMilliseconds())/(oneDay)));
+        console.log("b");
+      }
+      console.log($scope.remainingDays);
+      console.log(billingDate);
 
     };
 
     $timeout(function() {
-      if(true) {            //need to add conditions getUnitsPerMonth() == null
+      if(true) {            //need to add conditions getAmountPerMonth() == null
         while(true) {
-          var UnitsPmonth = prompt('Desired Monthly payment:');
-          var MonthStartDate = prompt('Month Start Date:');
-          if(UnitsPmonth && MonthStartDate) {
-            //createProject(projectTitle);// need to change
-            createUnitsPerMonth(UnitsPmonth);
+          var AmountPMonth = prompt('Desired Monthly payment:');
+          var MonthStartDate = prompt('Billing Period Start Date:');
+          if(AmountPMonth && MonthStartDate) {
+            createAmountPerMonth(AmountPMonth);
+            createStartDate(MonthStartDate);
+            console.log(MonthStartDate);
             break;
           }
         }
+        //calculate remaining days
+        calculateRemainingDays(MonthStartDate);
       }
     });
 
@@ -245,7 +250,7 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
     });
   }])
 
-  .controller('LineCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
+  .controller('GraphCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
 
     $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
     $scope.series = ['Series A', 'Series B'];
