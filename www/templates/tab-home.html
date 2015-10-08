@@ -3,9 +3,13 @@
 
     <div class="page-header">
       <h5 class="text-center"><b>REMAINING</b></h5>
+
     </div>
 
-    <div class="row">
+    <div class="row" ng-controller="progressBar">
+      <button class="button button-small button-assertive" ng-click="countUnits();">
+        plus +
+      </button>
       <div class="col col-33">
         <div class="card">
           <div class="item item-divider text-center">Days :</div>
@@ -33,7 +37,8 @@
           <div class="item item-divider text-center">Per day :</div>
           <div class="item item-body text-center">
             <div>
-              <b>Rs.{{input.AmountPM}}</b>
+              <b>Rs.{{input.AmountPM/30}}</b>
+
             </div>
           </div>
         </div>
@@ -48,11 +53,11 @@
       </div>
 
       <label class="row text-center">
-        <div class="col col-33">This month usage :</div><div class="col col-33">25 units of 100</div><div class="col col-33">Rs.250.00 of Rs.1000.00</div>
+        <div class="col col-33">This month usage :</div><div class="col col-33">{{input.count}} units of {{DesiredUnits}}</div><div class="col col-33">Rs.250.00 of Rs.{{input.AmountPM}}</div>
       </label>
 
-      <progressbar class="progress-striped active" animate="true" max="100" value="progressValue" type="success">
-        <i><span count-to="{{countTo}}" duration="1" count-from="{{countFrom}}"></span>%</i>
+      <progressbar class="progress-striped active" animate="true" max="100" value="input.count" type="success">
+        <i><span count-to="{{input.count}}" duration="1" count-from="{{countFrom}}"></span>%</i>
       </progressbar>
     </div>
 

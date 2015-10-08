@@ -74,7 +74,7 @@ angular.module('electricityUsage', ['ionic', 'electricityUsage.controllers', 'el
       views: {
         'tab-notifications': {
           templateUrl: 'templates/tab-notifications.html',
-          controller: 'AccountCtrl'
+          controller: 'SettingsCtrl'
         }
       }
     })

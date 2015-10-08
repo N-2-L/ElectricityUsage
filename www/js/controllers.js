@@ -86,19 +86,58 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
 
   })
 
-.controller("progressBar",function($scope,$timeout){
-  var amt = 66;
+.controller("progressBar",function($scope,$timeout,Authorization){
+    $scope.input = Authorization;
 
-  $scope.countTo = amt;
-  $scope.countFrom = 0;
+    var amt = $scope.input.count;
 
-  $timeout(function(){
-    $scope.progressValue = amt;
-  }, 200);
+    console.log("inside pro" + $scope.input.count);
+
+    $scope.countTo = amt;
+    $scope.countFrom = 0;
+
+    $timeout(function(){
+      $scope.progressValue = amt;
+    }, 200);
+
 
 })
 
   .controller('homeCtrl',function($scope,$timeout,Authorization){
+
+    $scope.DesiredUnits = null;
+
+    var /**
+     * @return {number}
+     */
+    BillAlgo = function(amount){
+
+      var units = 0;
+      if (amount< 502.40){
+        units = (amount/7.85);
+      }
+      else if(502.40 < amount && amount<822.40){
+        units =  ((amount-502.40)/10 + 64);
+      }
+      else if(822.40<amount<1710.40){
+        units = 96 + (amount-822.40)/27.75;
+      }
+      else if(1710.40 < amount <3758.40){
+        units = 128 + (amount-1710.40)/32;
+      }
+      else if(3758.40<amount){
+        units = 192 + (amount-3758.40)/45;
+      }
+
+      return units;
+
+    };
+
+
+    $scope.DesiredUnits = BillAlgo(6233.40);
+
+
+
 
     $scope.input = Authorization;
 
@@ -125,11 +164,14 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
 
     $scope.Tdate = todayDate();
 
+
+
     var createAmountPerMonth = function(Amount) {
       // craeate Amount per month in local
       window.localStorage['AmountPM'] = Amount;
       $scope.input.AmountPM = Amount;
     };
+
 
     var getAmountPerMonth = function(){
       // get Amount per month from local
@@ -150,6 +192,14 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
       return $scope.input.BillingStartDate;
     };
 
+
+    $scope.input.count = 0;
+    $scope.countUnits = function() {
+      console.log($scope.input.count);
+      $scope.input.count += 1;
+    };
+
+
     //function to calculate remaining days
     //calculate the remaining days in a proper way if in next month
     var calculateRemainingDays = function(billingDate){
@@ -169,6 +219,7 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
       }
       console.log($scope.remainingDays+"remaining");
       console.log(billingDate+"billing date");
+      console.log($scope.remainingDays);
     };
 
     $timeout(function() {
