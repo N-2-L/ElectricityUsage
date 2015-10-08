@@ -1,16 +1,27 @@
 <ion-view view-title="Statistics">
   <ion-content>
-    <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/chats/{{chat.id}}">
-        <img ng-src="{{chat.face}}">
-        <h2>{{chat.name}}</h2>
-        <p>{{chat.lastText}}</p>
-        <i class="icon ion-chevron-right icon-accessory"></i>
 
-        <ion-option-button class="button-assertive" ng-click="remove(chat)">
-          Delete
-        </ion-option-button>
-      </ion-item>
-    </ion-list>
+    <div ng-controller="LineCtrl" class="container">
+
+      <label class="row text-center">
+        <div class="col col-33">This month usage :</div><div class="col col-33">25 units of 100</div><div class="col col-33">Rs.250.00 of Rs.1000.00</div>
+      </label>
+
+      <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="true" chart-series="series" chart-click="onClick"></canvas>
+      <canvas class="chart chart-line" data="data" labels="labels" series='series' style="height: 50px;"></canvas>
+    </div>
+
+    <!--<ion-list>-->
+      <!--<ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/chats/{{chat.id}}">-->
+        <!--<img ng-src="{{chat.face}}">-->
+        <!--<h2>{{chat.name}}</h2>-->
+        <!--<p>{{chat.lastText}}</p>-->
+        <!--<i class="icon ion-chevron-right icon-accessory"></i>-->
+
+        <!--<ion-option-button class="button-assertive" ng-click="remove(chat)">-->
+          <!--Delete-->
+        <!--</ion-option-button>-->
+      <!--</ion-item>-->
+    <!--</ion-list>-->
   </ion-content>
 </ion-view>
