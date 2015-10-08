@@ -3,12 +3,24 @@
 
     <div ng-controller="LineCtrl" class="container">
 
-      <label class="row text-center">
-        <div class="col col-33">This month usage :</div><div class="col col-33">25 units of 100</div><div class="col col-33">Rs.250.00 of Rs.1000.00</div>
-      </label>
+      <!-- select week or month-S-->
+      <div class="page-header">
+        <h5 class="text-center"><b>
+          <select>
+            <option selected>PAST WEEK</option>
+            <option>PAST MONTH</option>
+          </select></b></h5>
+      </div>
 
+      <!-- try bootstrap dropdown-->
+
+      <canvas id="ticks" class="chart chart-line chart-xl" data="data" options="options" labels="labels"></canvas>
+
+      <div class="page-header">
+        <h5 class="text-center"><b>MONTHLY USAGE</b></h5>
+      </div>
       <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="true" chart-series="series" chart-click="onClick"></canvas>
-      <canvas class="chart chart-line" data="data" labels="labels" series='series' style="height: 50px;"></canvas>
+
     </div>
 
     <!--<ion-list>-->

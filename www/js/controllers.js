@@ -134,7 +134,7 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
     });
     // Configure all line charts
     ChartJsProvider.setOptions('Line', {
-      datasetFill: false
+      datasetFill: true
     });
   }])
 
