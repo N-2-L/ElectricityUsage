@@ -1,6 +1,36 @@
 angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.js'])
 //angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo'])
 
+  .factory('UnitsFac', function() {
+    return {
+      all: function() {
+        var projectString = window.localStorage['projects'];
+        if(projectString) {
+          return angular.fromJson(projectString);
+        }
+        return [];
+      },
+      save: function(projects) {
+        window.localStorage['projects'] = angular.toJson(projects);
+      },
+      newProject: function(projectTitle) {
+        // Add a new project
+        return {
+          title: projectTitle,
+          tasks: []
+        };
+      },
+      getLastActiveIndex: function() {
+        return parseInt(window.localStorage['lastActiveProject']) || 0;
+      },
+      setLastActiveIndex: function(index) {
+        window.localStorage['lastActiveProject'] = index;
+      }
+    }
+  })
+///////////////////////////////////////////////////////////
+
+
 .controller('DashCtrl', function($scope) {})
 
 .controller('ChatsCtrl', function($scope, Chats) {
@@ -41,13 +71,52 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
 })
 
   .controller('homeCtrl',function($scope,$timeout){
+
+    // generates today date!
+    var todayDate = function(){
+
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1; //January is 0!
+      var yyyy = today.getFullYear();
+
+      if(dd<10) {
+        dd='0'+dd
+      }
+
+      if(mm<10) {
+        mm='0'+mm
+      }
+
+      today = mm+'/'+dd+'/'+yyyy;
+
+      return today;
+    };
+
+
+    var createUnitsPerMonth = function(Units) {
+      // craeate Units per month in local
+      window.localStorage['UnitsPM'] = Units;
+      $scope.UnitsPM = Units;
+
+    };
+
+    var getUnitsPerMonth = function(){
+      // get Units per month from local
+      $scope.UnitsPM = window.localStorage['UnitsPM'];
+      return $scope.UnitsPM;
+
+    };
+
+
     $timeout(function() {
-      if(1> 0) {            //need to add conditions
+      if(getUnitsPerMonth() == null) {            //need to add conditions
         while(true) {
           var UnitsPmonth = prompt('Units per Month:');
           var MonthStartDate = prompt('Month Start Date:');
           if(UnitsPmonth && MonthStartDate) {
-            createProject(projectTitle);// need to change
+            //createProject(projectTitle);// need to change
+            createUnitsPerMonth(UnitsPmonth);
             break;
           }
         }
@@ -92,20 +161,3 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
 
 
 
-//var myApp = angular.module("myApp", ["ui.bootstrap","countTo"]);
-//
-//myApp.controller("progressBar",function($scope,$timeout){
-//
-//  var amt = 66;
-//
-//  $scope.countTo = amt;
-//  $scope.countFrom = 0;
-//
-//  $timeout(function(){
-//    $scope.progressValue = amt;
-//  }, 200);
-//
-//});
-
-// http://angular-ui.github.io/bootstrap/#/progressbar
-// https://github.com/sparkalow/angular-count-to
