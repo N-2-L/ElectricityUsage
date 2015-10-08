@@ -133,11 +133,7 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
 
     };
 
-
     $scope.DesiredUnits = BillAlgo(6233.40);
-
-
-
 
     $scope.input = Authorization;
 
@@ -164,14 +160,11 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
 
     $scope.Tdate = todayDate();
 
-
-
     var createAmountPerMonth = function(Amount) {
       // craeate Amount per month in local
       window.localStorage['AmountPM'] = Amount;
       $scope.input.AmountPM = Amount;
     };
-
 
     var getAmountPerMonth = function(){
       // get Amount per month from local
@@ -182,7 +175,6 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
     var createStartDate = function(Date) {
       // create billing period starting date in local
       window.localStorage['BillingStartDate'] = Date;
-      console.log(Date+"date in create start date");
       $scope.input.BillingStartDate = Date;
     };
 
@@ -192,13 +184,13 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
       return $scope.input.BillingStartDate;
     };
 
-
+    //count for the units increase button
     $scope.input.count = 0;
+
     $scope.countUnits = function() {
       console.log($scope.input.count);
       $scope.input.count += 1;
     };
-
 
     //function to calculate remaining days
     //calculate the remaining days in a proper way if in next month
@@ -206,20 +198,11 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
       var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
       var today = new Date();
       var thisMonthBillingDate = new Date(today.getFullYear(),today.getMonth(),billingDate);
-      console.log(today);
-      console.log(thisMonthBillingDate);
-      console.log(today.getTime());
-      console.log(thisMonthBillingDate.getTime());
-      if(thisMonthBillingDate.getDate()>today.getDate()){
-        $scope.remainingDays = Math.round(Math.abs((today.getMilliseconds() - thisMonthBillingDate.getMilliseconds())/(oneDay)));
-        console.log("a");
+      if(thisMonthBillingDate.getTime()>today.getTime()){
+        $scope.remainingDays = Math.round(Math.abs((today.getTime() - thisMonthBillingDate.getTime())/(oneDay)));
       }else{
-        $scope.remainingDays = 30 - Math.round(Math.abs((today.getMilliseconds() - thisMonthBillingDate.getMilliseconds())/(oneDay)));
-        console.log("b");
+        $scope.remainingDays = 30 - Math.round(Math.abs((today.getTime() - thisMonthBillingDate.getTime())/(oneDay)));
       }
-      console.log($scope.remainingDays+"remaining");
-      console.log(billingDate+"billing date");
-      console.log($scope.remainingDays);
     };
 
     $timeout(function() {
@@ -230,7 +213,6 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
           if(AmountPMonth && MonthStartDate) {
             createAmountPerMonth(AmountPMonth);
             createStartDate(MonthStartDate);
-            console.log(MonthStartDate+"timeout");
             break;
           }
         }
