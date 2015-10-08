@@ -20,7 +20,7 @@
           </div>
           <div class="col col-50">
             <label class="item item-input">
-              <input type="number" placeholder="{{units/4}}" ng-model="amount">
+              <input type="number" placeholder="{{input.UnitsPM}}" ng-model="input.UnitsPM">
 
             </label>
           </div>
@@ -32,9 +32,11 @@
             <label> Set Month Start Date:</label>
           </div>
           <div class="col col-50">
-            <label class="item item-input">
-              <input type="date" placeholder="Date">
-            </label>
+
+            <ionic-datepicker input-obj="datepickerObject">
+              <button class="button button-block button-positive"> {{datepickerObject.inputDate | date:'dd - MMMM - yyyy'}}</button>
+            </ionic-datepicker>
+
           </div>
         </div>
       </li>

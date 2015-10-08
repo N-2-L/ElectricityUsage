@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'electricityUsage.services' is found in services.js
 // 'electricityUsage.controllers' is found in controllers.js
-angular.module('electricityUsage', ['ionic', 'electricityUsage.controllers', 'electricityUsage.services'])
+angular.module('electricityUsage', ['ionic', 'electricityUsage.controllers', 'electricityUsage.services', 'ionic-datepicker'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -74,7 +74,7 @@ angular.module('electricityUsage', ['ionic', 'electricityUsage.controllers', 'el
       views: {
         'tab-notifications': {
           templateUrl: 'templates/tab-notifications.html',
-          controller: 'ChatsCtrl'
+          controller: 'AccountCtrl'
         }
       }
     })
@@ -84,7 +84,7 @@ angular.module('electricityUsage', ['ionic', 'electricityUsage.controllers', 'el
     views: {
       'tab-settings': {
         templateUrl: 'templates/tab-settings.html',
-        controller: 'AccountCtrl'
+        controller: 'SettingsCtrl'
       }
     }
   });
