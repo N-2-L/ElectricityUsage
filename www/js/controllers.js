@@ -185,18 +185,18 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
 
   })
 
-  //// Optional configuration
-  //.config(['ChartJsProvider', function (ChartJsProvider) {
-  //  // Configure all charts
-  //  ChartJsProvider.setOptions({
-  //    colours: ['#FF5252', '#FF8A80'],
-  //    responsive: false
-  //  });
-  //  // Configure all line charts
-  //  ChartJsProvider.setOptions('Line', {
-  //    datasetFill: false
-  //  });
-  //}])
+  // Optional configuration
+  .config(['ChartJsProvider', function (ChartJsProvider) {
+    // Configure all charts
+    ChartJsProvider.setOptions({
+      colours: ['#FF5252', '#FF8A80'],
+      responsive: true
+    });
+    // Configure all line charts
+    ChartJsProvider.setOptions('Line', {
+      datasetFill: true
+    });
+  }])
 
   .controller('LineCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
 
