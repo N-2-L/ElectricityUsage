@@ -11,7 +11,7 @@
           <div class="item item-divider text-center">Days :</div>
           <div class="item item-body text-center">
             <div>
-              <b>{{remainingDays}}</b>
+              <b><small>{{remainingDays}}</small></b>
             </div>
           </div>
         </div>
@@ -22,7 +22,7 @@
           <div class="item item-divider text-center">Quota :</div>
           <div class="item item-body text-center">
             <div>
-              <b>Rs.{{(input.AmountPM - MoneyToPay).toFixed(0)}}</b>
+              <b><small>Rs.{{(input.AmountPM - MoneyToPay).toFixed(0)}}</small></b>
             </div>
           </div>
         </div>
@@ -33,7 +33,11 @@
           <div class="item item-divider text-center">Per day :</div>
           <div class="item item-body text-center">
             <div>
+<<<<<<< HEAD
               <b>Rs.{{((input.AmountPM - MoneyToPay) / remainingDays).toFixed(0)}}</b>
+=======
+              <b><small>Rs.{{((input.AmountPM - MoneyToPay) / remainingDays).toFixed(0)}}</small></b>
+>>>>>>> bb87baacf4772adb668a7b82e614d2b28bcf6d95
             </div>
           </div>
         </div>
@@ -67,7 +71,7 @@
           <span class="badge badge-balanced">Rs.{{idealUsage.toFixed(0)}}</span>
         </li>
         <li class="item">Usage Status
-          <span class="badge badge-balanced">20 units less than ideal</span>
+          <span class="badge badge-balanced"><small>Rs.{{(idealUsage - MoneyToPay).toFixed(0)}} less than ideal</small></span>
         </li>
         <li class="item">Today usage
           <span class="badge badge-balanced">5 units</span>
@@ -76,7 +80,7 @@
           <span class="badge badge-balanced">15 units</span>
         </li>
         <li class="item">Current billing period
-          <span class="badge badge-balanced">put period from variable</span>
+          <span class="badge badge-balanced"><small>{{Tdate}} to 11/09/2015</small></span>
         </li>
         <li class="item">Today date
           <span class="badge badge-positive">{{Tdate}}</span>
