@@ -7,12 +7,14 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
   return authorization;
   })
 
-  .factory('UnitsFac', function() {
+  .factory('NotsSave', function() {
+
+
     return {
       all: function() {
-        var projectString = window.localStorage['projects'];
-        if(projectString) {
-          return angular.fromJson(projectString);
+        var String = window.localStorage['projects'];
+        if(String) {
+          return angular.fromJson(String);
         }
         return [];
       },
@@ -20,7 +22,7 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
         window.localStorage['projects'] = angular.toJson(projects);
       },
       newProject: function(projectTitle) {
-        // Add a new project
+        // Add a new notifications
         return {
           title: projectTitle,
           tasks: []
@@ -32,7 +34,9 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
       setLastActiveIndex: function(index) {
         window.localStorage['lastActiveProject'] = index;
       }
-    }
+    };
+
+
   })
 ///////////////////////////////////////////////////////////
   .controller('SettingsCtrl', function($scope,Authorization) {
@@ -102,15 +106,27 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
 
 })
 
-  .controller('homeCtrl',function($scope,$timeout,Authorization){
+  .controller('homeCtrl',function($scope,$timeout,Authorization,NotsSave){
 
     $scope.DesiredUnits = null;
+
+    $scope.Notifications = [{
+      Title: 'exceeded limit today'
+    }, {
+      Title: 'exceeded limit yesterday'
+    }, {
+      Title: 'exceeded limit last Monday'
+    }, {
+      Title: 'exceeded limit last Sunday'
+    }, {
+      Title: ' exceeded limit last Friday'
+    }];
 
     var /**
      * @return {number}
      */
     BillAlgo = function(amount){
-
+      // generate amount of units used for the bill.
       var units = 0;
       if (amount< 502.40){
         units = (amount/7.85);
@@ -138,7 +154,7 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
 
     var toPay= null;
     var MoneytoPayAlgo = function(units){
-
+      //calculate money to pay for used units
       if(units<64){
         toPay = units*7.85;
       }
@@ -219,11 +235,25 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
 
     //function to increment units
     $scope.countUnits = function() {
-      console.log($scope.input.count);
-      $scope.input.count += 1;
-      $scope.MoneyToPay = MoneytoPayAlgo($scope.input.count);
-      console.log(getStartDate());
-      console.log(calculateRemainingDays(getStartDate()));
+
+      if (($scope.input.count/$scope.DesiredUnits)*100 >= 99){
+
+        alert("You have exceeded the ideal usage! ");
+        var Notific = {title:'Unit limit exceeded in " + todayDate()'};
+        console.log(Notific);
+        $scope.Notifications.push(Notific);
+        NotsSave.save(Notific);
+      }
+      else{
+        console.log($scope.input.count);
+        $scope.input.count += 1;
+        $scope.MoneyToPay = MoneytoPayAlgo($scope.input.count);
+        console.log(getStartDate());
+
+        //console.log(calculateRemainingDays(getStartDate()));
+
+
+      }
       //calculateRemainingDays(getStartDate());
     };
 
@@ -241,14 +271,14 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
     };
 
     $timeout(function() {
-      if(true) {            //need to add conditions getAmountPerMonth() == null
+      if(true) {            //need to add conditions getAmountPerMonth() == null || getAmountPerMonth() == NaN
         while(true) {
           var AmountPMonth = prompt('Desired Monthly payment:');
           var MonthStartDate = prompt('Billing Period Start Date:');
           $scope.DesiredUnits = BillAlgo(AmountPMonth); // taking desiredUnits count to dash
           if(AmountPMonth && MonthStartDate) {
-            createAmountPerMonth(AmountPMonth);
-            createStartDate(MonthStartDate);
+            createAmountPerMonth(Number(AmountPMonth));
+            createStartDate(Number(MonthStartDate));
             break;
           }
         }
@@ -272,6 +302,29 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
     });
   }])
 
+  .controller('NotfiCtrl', function($scope,NotsSave){
+    $scope.Notifications = NotsSave.all();
+    $scope.Notifications = [{
+      id:1,
+      Title: 'exceeded limit today'
+    }, {
+      id:2,
+      Title: 'exceeded limit yesterday'
+    }, {
+      id:3,
+      Title: 'exceeded limit last Monday'
+    }, {
+      id:4,
+      Title: 'exceeded limit last Sunday'
+    }, {
+      id:5,
+      Title: 'exceeded limit last Friday'
+    }];
+
+    console.log("Array is :" + $scope.Notifications.Title);
+
+
+  })
   .controller('GraphCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
 
     $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];

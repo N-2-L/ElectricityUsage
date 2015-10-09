@@ -1,10 +1,10 @@
-<ion-view view-title="Notifications">
+<ion-view view-title="Notifications" ng-controller="NotfiCtrl">
   <ion-content>
-    <div class="card">
-      <div class="item item-text-wrap">
-        This is a basic Card which contains an item that has wrapping text.
-      </div>
-    </div>
+    <ion-list>
+      <ion-item ng-repeat="Noti in Notifications"><i class="ion-alert-circled"></i>
+        {{Noti.Title}}
+      </ion-item>
+    </ion-list>
 
 
 
