@@ -4,7 +4,6 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
 
   authorization = {};
   authorization.UnitsPM = "";
-  //authorization.Splayer = "";
   return authorization;
   })
 
@@ -41,7 +40,7 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
     window.localStorage['UnitsPM'] = $scope.input.UnitsPM;
 
     $scope.datepickerObject = {
-      titleLabel: 'Title',  //Optional
+      titleLabel: 'Date Picker',  //Optional
       todayLabel: 'Today',  //Optional
       closeLabel: 'Close',  //Optional
       setLabel: 'Set',  //Optional
