@@ -3,13 +3,9 @@
 
     <div class="page-header">
       <h5 class="text-center"><b>REMAINING</b></h5>
-
     </div>
 
     <div class="row" ng-controller="progressBar">
-      <button class="button button-small button-assertive" ng-click="countUnits();">
-        plus +
-      </button>
       <div class="col col-33">
         <div class="card">
           <div class="item item-divider text-center">Days :</div>
@@ -46,10 +42,15 @@
     </div>
 
     <!-- progressbar added by shanika-->
-    <div ng-controller="progressBar" class="container">
+    <div id="progressBar" ng-controller="progressBar" class="container">
 
       <div class="page-header">
-        <h5 class="text-center"><b>BILLING USAGE</b></h5>
+        <h5 class="text-center"><b>BILLING USAGE</b>
+
+          <button class="button button-balanced item-button-right button-small" ng-click="countUnits()">
+            UNITS +
+          </button>
+        </h5>
       </div>
 
       <label class="row text-center">
