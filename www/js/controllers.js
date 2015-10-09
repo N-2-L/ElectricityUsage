@@ -4,7 +4,6 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
 
   authorization = {};
   authorization.UnitsPM = "";
-  //authorization.Splayer = "";
   return authorization;
   })
 
@@ -41,7 +40,7 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
     window.localStorage['UnitsPM'] = $scope.input.UnitsPM;
 
     $scope.datepickerObject = {
-      titleLabel: 'Title',  //Optional
+      titleLabel: 'Date Picker',  //Optional
       todayLabel: 'Today',  //Optional
       closeLabel: 'Close',  //Optional
       setLabel: 'Set',  //Optional
@@ -104,8 +103,17 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
 })
 
   .controller('homeCtrl',function($scope,$timeout,Authorization){
+    //data passing service
+    $scope.input = Authorization;
 
     $scope.DesiredUnits = null;
+
+    $scope.MoneyToPay=0;
+
+    //count for the units increase button
+    $scope.input.count = 0;
+
+
 
     var /**
      * @return {number}
@@ -164,7 +172,7 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
 
 
 
-    $scope.input = Authorization;
+
 
     // generates today date!
     var todayDate = function(){
@@ -213,19 +221,10 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
       return $scope.input.BillingStartDate;
     };
 
-    //count for the units increase button
-    $scope.input.count = 0;
-
-    $scope.MoneyToPay=0;
-
     //function to increment units
     $scope.countUnits = function() {
-      console.log($scope.input.count);
       $scope.input.count += 1;
       $scope.MoneyToPay = MoneytoPayAlgo($scope.input.count);
-      console.log(getStartDate());
-      console.log(calculateRemainingDays(getStartDate()));
-      //calculateRemainingDays(getStartDate());
     };
 
     //function to calculate remaining days
@@ -241,6 +240,20 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
       }
     };
 
+//not working
+    ////get amountper day
+    //var getAmountPerDay = function(){
+    //  $scope.AmountPD = (getAmountPerMonth() - $scope.MoneyToPay)/$scope.remainingDays;
+    //  console.log($scope.AmountPD+"pd");
+    //  console.log(getAmountPerMonth()+"pm");
+    //  console.log($scope.MoneyToPay+"pay");
+    //  console.log($scope.remainingDays+"rem");
+    //  return $scope.AmountPD;
+    //};
+    //
+    ////get amount per day
+    //$scope.AmountPerDay=getAmountPerDay();
+
     $timeout(function() {
       if(true) {            //need to add conditions getAmountPerMonth() == null
         while(true) {
@@ -255,6 +268,7 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
         }
         //calculate remaining days
         calculateRemainingDays(MonthStartDate);
+        $scope.input.initAmountPD = $scope.AmountPM / $scope.remainingDays;
       }
     });
 
