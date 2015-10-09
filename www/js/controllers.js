@@ -215,10 +215,16 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
     //count for the units increase button
     $scope.input.count = 0;
 
+    $scope.MoneyToPay=0;
+
+    //function to increment units
     $scope.countUnits = function() {
       console.log($scope.input.count);
       $scope.input.count += 1;
       $scope.MoneyToPay = MoneytoPayAlgo($scope.input.count);
+      console.log(getStartDate());
+      console.log(calculateRemainingDays(getStartDate()));
+      //calculateRemainingDays(getStartDate());
     };
 
     //function to calculate remaining days
