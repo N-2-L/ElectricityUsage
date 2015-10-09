@@ -120,7 +120,7 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
     }, {
       Title: 'exceeded limit last Sunday'
     }, {
-      Title: ' exceeded limit last Friday'
+      Title: 'exceeded limit last Friday'
     }];
 
     //data passing service
@@ -252,7 +252,7 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
       else{
         console.log($scope.input.count);
         $scope.input.count += 1;
-        
+
         console.log(getStartDate());
 
         $scope.MoneyToPay = MoneytoPayAlgo($scope.input.count);
