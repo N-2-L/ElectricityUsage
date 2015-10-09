@@ -141,10 +141,6 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
 
     };
 
-
-
-
-
     var toPay= null;
     var MoneytoPayAlgo = function(units){
 
@@ -168,11 +164,6 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
 
       return toPay;
     };
-
-
-
-
-
 
     // generates today date!
     var todayDate = function(){
@@ -221,10 +212,15 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
       return $scope.input.BillingStartDate;
     };
 
+    var getIdealUsage = function(){
+      return $scope.input.AmountPM * (30 - $scope.remainingDays)/30;
+    }
+
     //function to increment units
     $scope.countUnits = function() {
       $scope.input.count += 1;
       $scope.MoneyToPay = MoneytoPayAlgo($scope.input.count);
+      $scope.idealUsage = getIdealUsage();
     };
 
     //function to calculate remaining days
@@ -266,11 +262,15 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
             break;
           }
         }
-        //calculate remaining days
-        calculateRemainingDays(MonthStartDate);
-        $scope.input.initAmountPD = $scope.AmountPM / $scope.remainingDays;
       }
+      //calculate remaining days
+      calculateRemainingDays(getStartDate());
+      //set initial amount per day
+      //$scope.input.initAmountPD = $scope.input.AmountPM / $scope.remainingDays;
+      //set ideal usage
+      $scope.idealUsage = getIdealUsage();
     });
+
 
   })
 
@@ -289,9 +289,18 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
 
   .controller('GraphCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
 
-    $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-    $scope.series = ['Series A', 'Series B'];
+    //past week/month
+    $scope.labels = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
+    $scope.series = ['Actual Usage', 'Desired Usage'];
     $scope.data = [
+      [65, 59, 80, 81, 56, 55, 40],
+      [28, 48, 40, 19, 86, 27, 90]
+    ];
+
+    //monthly usage
+    $scope.labels2 = ["January", "February", "March", "April", "May", "June", "July"];
+    $scope.series2 = ['Actual Payment', 'Desired Payment'];
+    $scope.data2 = [
       [65, 59, 80, 81, 56, 55, 40],
       [28, 48, 40, 19, 86, 27, 90]
     ];
@@ -303,7 +312,12 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
     $timeout(function () {
       $scope.data = [
         [28, 48, 40, 19, 86, 27, 90],
-        [65, 59, 80, 81, 56, 55, 40]
+        [50, 50, 50, 50, 50, 50, 50]
+      ],
+
+      $scope.data2 = [
+        [28, 48, 40, 19, 86, 27, 90],
+        [50, 50, 50, 50, 50, 50, 50]
       ];
     }, 3000);
   }]);
