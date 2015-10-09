@@ -55,7 +55,7 @@ angular.module('electricityUsage', ['ionic', 'electricityUsage.controllers', 'el
       views: {
         'tab-stats': {
           templateUrl: 'templates/tab-stats.html',
-          controller: 'ChatsCtrl'
+          controller: 'GraphCtrl'
         }
       }
     })

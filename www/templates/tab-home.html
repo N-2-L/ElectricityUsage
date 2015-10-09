@@ -26,7 +26,7 @@
           <div class="item item-divider text-center">Quota :</div>
           <div class="item item-body text-center">
             <div>
-              <b>Rs.{{input.AmountPM}}</b>
+              <b>Rs.{{input.AmountPM - MoneyToPay}}</b>
             </div>
           </div>
         </div>
@@ -53,11 +53,11 @@
       </div>
 
       <label class="row text-center">
-        <div class="col col-33">This month usage :</div><div class="col col-33">{{input.count}} units of {{DesiredUnits}}</div><div class="col col-33">Rs.250.00 of Rs.{{input.AmountPM}}</div>
+        <div class="col col-33">This month usage :</div><div class="col col-33">{{input.count}} units of {{DesiredUnits}}</div><div class="col col-33">Rs.{{MoneyToPay}} of Rs.{{input.AmountPM}}</div>
       </label>
 
-      <progressbar class="progress-striped active" animate="true" max="100" value="input.count" type="success">
-        <i><span count-to="{{input.count}}" duration="1" count-from="{{countFrom}}"></span>%</i>
+      <progressbar class="progress-striped active" animate="true" max="100" value="(input.count/DesiredUnits)*100" type="success">
+        <i><span count-to="{{(input.count/DesiredUnits)*100}}" duration="1" count-from="{{countFrom}}"></span>%</i>
       </progressbar>
     </div>
 

@@ -120,13 +120,13 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
         units =  ((amount-502.40)/10 + 64);
       }
       else if(822.40<amount<1710.40){
-        units = 96 + (amount-822.40)/27.75;
+        units = 96 + ((amount-822.40)/27.75);
       }
       else if(1710.40 < amount <3758.40){
-        units = 128 + (amount-1710.40)/32;
+        units = 128 + ((amount-1710.40)/32);
       }
       else if(3758.40<amount){
-        units = 192 + (amount-3758.40)/45;
+        units = 192 + ((amount-3758.40)/45);
       }
 
       return units;
@@ -134,8 +134,31 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
     };
 
 
-    $scope.DesiredUnits = BillAlgo(6233.40);
 
+
+    var toPay= null;
+    var MoneytoPayAlgo = function(units){
+
+      if(units<64){
+        toPay = units*7.85;
+      }
+      else if(64 < units < 96){
+        toPay = (units-64)*10 + 502.40;
+      }
+      else if(96 < units < 128){
+        toPay = (units-96)*27.75 + 822.40;
+
+      }
+      else if(128 < units < 192){
+        toPay = (units-128)*32 + 1710.40;
+
+      }
+      else if(units > 192){
+        toPay = (units-192)*45 +3758.40;
+      }
+
+      return toPay;
+    };
 
 
 
@@ -197,6 +220,7 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
     $scope.countUnits = function() {
       console.log($scope.input.count);
       $scope.input.count += 1;
+      $scope.MoneyToPay = MoneytoPayAlgo($scope.input.count);
     };
 
 
@@ -223,6 +247,7 @@ angular.module('electricityUsage.controllers', ['ui.bootstrap','countTo','chart.
         while(true) {
           var AmountPMonth = prompt('Desired Monthly payment:');
           var MonthStartDate = prompt('Billing Period Start Date:');
+          $scope.DesiredUnits = BillAlgo(AmountPMonth); // taking desiredUnits count to dash
           if(AmountPMonth && MonthStartDate) {
             createAmountPerMonth(AmountPMonth);
             createStartDate(MonthStartDate);
