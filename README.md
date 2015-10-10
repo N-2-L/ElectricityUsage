@@ -17,4 +17,4 @@ Technologies
  
 Hybrid mobile application development(ionic framework),
 IOT technology(raspberry pi/arduino) & 
-Reflective IR sensor/ current sensor to get input
+Reflective IR sensor/ current sensor to get input.
